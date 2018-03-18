@@ -22,9 +22,6 @@ import com.inventorywebservice.inventorymanager.model.User;
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
-	static {
-	System.out.println(">>>>>>>>>>>>>>>>>>>>>>> HERE");	
-	}
 
 	public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
