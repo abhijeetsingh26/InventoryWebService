@@ -1,9 +1,8 @@
 package com.inventorywebservice.inventorymanager.model;
 
+
 import java.io.Serializable;
-
 import org.hibernate.annotations.Entity;
-
 @Entity
 public class PurchaseModel implements Serializable {
 	
