@@ -25,7 +25,7 @@ import com.inventorywebservice.inventorymanager.util.CustomErrorType;
 @RequestMapping("/item")
 public class PurchaseController {
 
-	public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
+	public static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 
 	@Autowired
 	PurchaseService purchaseService; //Service which will do all data retrieval/manipulation work
