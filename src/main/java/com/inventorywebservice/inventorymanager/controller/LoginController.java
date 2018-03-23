@@ -34,7 +34,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody UserLoginBean userLoginBean, UriComponentsBuilder ucBuilder) {
-
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> IN LOGIN CONTROLLER");
 		String userUUID = loginService.doLogin(userLoginBean);
 
 		HttpHeaders headers = new HttpHeaders();
