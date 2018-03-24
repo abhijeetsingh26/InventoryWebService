@@ -1,39 +1,48 @@
 package com.inventorywebservice.inventorymanager.model;
 
-
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 
-@DynamicUpdate
-@Table(name="endusers")
-
+@Entity
+@Table(name = "endusers")
 public class EnduserModel implements Serializable {
-	
+
 	private static final long serialVersionUID = -2878762391725649257L;
-	@Column
-	String user_uuid;
-	@Column
-	String user_email;
-	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", unique = true, updatable = false, nullable = false)
+    @GenericGenerator(name = "native", strategy = "native")
+	Long userId;
+	@Id
+	@Column(name = "user_email")
+	String userEmail;
+	@Column(name = "createdAt")
 	Date createdAt;
-	@Column
+	@Column(name = "modifiedAt")
 	Date modifiedAt;
-	public String getUser_uuid() {
-		return user_uuid;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id", unique = true, updatable = false, nullable = false)
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUser_uuid(String user_uuid) {
-		this.user_uuid = user_uuid;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	public String getUser_email() {
-		return user_email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -47,5 +56,6 @@ public class EnduserModel implements Serializable {
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
+	
 	
 }

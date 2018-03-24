@@ -5,6 +5,6 @@ import com.inventorywebservice.inventorymanager.Bean.UserLoginBean;
 public interface LoginService {
 	
 	String doLogin(UserLoginBean userLoginBean);
-	Boolean checkUserExists(UserLoginBean userLoginBean);
-	Boolean createNewUserAssociation(UserLoginBean userLoginBean);
+	String checkUserExists(String userEmail);
+	String createNewUserAssociation(String userEmail);
 }

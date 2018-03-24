@@ -1,4 +1,4 @@
-package com.inventorywebservice.inventorymanager.dao;
+package  com.inventorywebservice.inventorymanager.repository;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;

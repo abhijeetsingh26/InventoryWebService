@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.inventorywebservice.inventorymanager.util.*;
 import com.inventorywebservice.inventorymanager.service.UserService;
-import com.inventorywebservice.inventorymanager.service.UserServiceImpl;
 import com.inventorywebservice.inventorymanager.model.User;
 
 @RestController

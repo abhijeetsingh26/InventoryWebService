@@ -1,45 +1,48 @@
 package com.inventorywebservice.inventorymanager.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inventorywebservice.inventorymanager.Bean.UserLoginBean;
-import com.inventorywebservice.inventorymanager.dao.LoginDAO;
+import com.inventorywebservice.inventorymanager.model.EnduserModel;
+import com.inventorywebservice.inventorymanager.repository.LoginRepository;;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-	
+
 	@Autowired
-	public LoginDAO loginDAO;
-	public void setPersonDAO(LoginDAO loginDAO) {
-		this.loginDAO = loginDAO;
-	}
-	
-	
-	
+	public LoginRepository loginDAO;
+
 	@Override
-	public String doLogin(UserLoginBean userLoginBean) {
-		if(!checkUserExists(userLoginBean))
-		{
-			createNewUserAssociation(userLoginBean);
-		}
+	public synchronized String doLogin(UserLoginBean userLoginBean) {
+		String userId = checkUserExists(userLoginBean.getUser_email());
+		if (userId != null)
+			return userId;
 		else
-		{
-			
-		}
-		return null;
+			return null;
 	}
 
 	@Override
-	public Boolean checkUserExists(UserLoginBean userLoginBean) {
-		System.out.println(">>>>>>>>>>>>>>> In check user exists");
-		return loginDAO.checkUserExists(userLoginBean);
+	public String checkUserExists(String userEmail) {
+		List<EnduserModel> userList = loginDAO.findByuserEmail(userEmail);
+		if (userList.size() > 0)
+			return userList.get(0).getUserId().toString();
+		else
+			return createNewUserAssociation(userEmail);
 	}
 
 	@Override
-	public Boolean createNewUserAssociation(UserLoginBean userLoginBean) {
-		
-		return null;
+	public String createNewUserAssociation(String userEmail) {
+		EnduserModel em = new EnduserModel();
+		em.setUserEmail(userEmail);
+		Date d = new Date();
+		em.setCreatedAt(d);
+		em.setModifiedAt(d);
+		EnduserModel newUser =  loginDAO.save(em);
+		return newUser.getUserId().toString();
 	}
 
 }

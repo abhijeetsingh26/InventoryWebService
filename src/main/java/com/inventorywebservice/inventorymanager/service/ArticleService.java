@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.inventorywebservice.inventorymanager.model.Article;
-import com.inventorywebservice.inventorymanager.dao.ArticleRepository;
+import com.inventorywebservice.inventorymanager.repository.ArticleRepository;
 @Service
 public class ArticleService implements IArticleService {
 	@Autowired
