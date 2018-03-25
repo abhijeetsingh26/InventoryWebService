@@ -17,26 +17,37 @@ import org.hibernate.annotations.GenericGenerator;
 public class EnduserModel implements Serializable {
 
 	private static final long serialVersionUID = -2878762391725649257L;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", unique = true, updatable = false, nullable = false)
-    @GenericGenerator(name = "native", strategy = "native")
-	Long userId;
-	@Id
+	@Column(name = "userUUID", unique = true, updatable = false, nullable = false)
+	String userUUID;
 	@Column(name = "user_email")
+	@Id
 	String userEmail;
+	@Column(name = "user_fname")
+	String userFirstName;
+	@Column(name = "user_lname")
+	String userLastName;
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+	public String getUserLastName() {
+		return userLastName;
+	}
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
 	@Column(name = "createdAt")
 	Date createdAt;
 	@Column(name = "modifiedAt")
 	Date modifiedAt;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id", unique = true, updatable = false, nullable = false)
-	public Long getUserId() {
-		return userId;
+	public String getuserUUID() {
+		return userUUID;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setuserUUID(String userUUID) {
+		this.userUUID = userUUID;
 	}
 	public String getUserEmail() {
 		return userEmail;

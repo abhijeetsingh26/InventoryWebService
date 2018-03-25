@@ -14,13 +14,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.inventorywebservice.inventorymanager.Bean.UserLoginBean;
 import com.inventorywebservice.inventorymanager.service.LoginService;
+import com.inventorywebservice.inventorymanager.util.AuthTokenVerifier;
 
 @RestController
 @RequestMapping("/Login")
 public class LoginController {
 
 
-	public static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
+	public static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	LoginService loginService;
@@ -30,10 +31,16 @@ public class LoginController {
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody UserLoginBean userLoginBean, UriComponentsBuilder ucBuilder) {
 		String userUUID = loginService.doLogin(userLoginBean);
-
 		HttpHeaders headers = new HttpHeaders();
-	//	headers.setLocation(ucBuilder.path("/api/Login/{userUUID}").buildAndExpand(user.getId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+		if(userUUID == null )
+		{
+			return new ResponseEntity<String>(headers, HttpStatus.UNAUTHORIZED);
+		}			
+		else
+		{
+			headers.set("userUUID", userUUID);
+			return new ResponseEntity<String>(headers, HttpStatus.OK);
+		}
 	}
 
 
