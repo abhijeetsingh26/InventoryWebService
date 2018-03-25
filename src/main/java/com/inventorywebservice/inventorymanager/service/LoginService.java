@@ -11,4 +11,5 @@ public interface LoginService {
 	LoginResponseBean doLogin(UserLoginBean userLoginBean);
 	EnduserModel checkUser(HashMap<String, String> userDataMap);
 	EnduserModel createNewUserAssociation(HashMap<String, String> userDataMap);
+	public Boolean checkUserExistForUUID(String userUUID);
 }

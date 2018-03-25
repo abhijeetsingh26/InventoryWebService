@@ -73,8 +73,16 @@ public class LoginServiceImpl implements LoginService {
 		EnduserModel newUser = loginDAO.save(em);
 		return newUser;
 	}
-
-
+	
+	@Override
+	public Boolean checkUserExistForUUID(String userUUID) 
+	{
+			List<EnduserModel> userList = loginDAO.findByuserUUID(userUUID);
+			if (userList.size() > 0)
+				return true;
+			else
+				return false;
+	}
 
 
 }
