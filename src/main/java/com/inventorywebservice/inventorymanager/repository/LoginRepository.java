@@ -9,4 +9,6 @@ import com.inventorywebservice.inventorymanager.model.EnduserModel;
 public interface LoginRepository  extends CrudRepository<EnduserModel, Long>  {
 	
 	List<EnduserModel> findByuserEmail(String userEmail);
+	
+	List<EnduserModel> findByuserUUID(String userUUID);
 }

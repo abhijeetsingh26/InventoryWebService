@@ -5,29 +5,45 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-@DynamicUpdate
+@Entity
 @Table(name="items_purchased")
-
 public class PurchaseModel implements Serializable {
 	
-	private static final long serialVersionUID = 908432581538678241L;
-	@Column
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "purchase_serial", unique = true, updatable = false, nullable = false)
+	int purchaseSerial;
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "purchase_serial", unique = true, nullable = false, updatable = false)
+	public int getPurchaseSerial() {
+		return purchaseSerial;
+	}
+	public void setPurchaseSerial(int purchaseSerial) {
+		this.purchaseSerial = purchaseSerial;
+	}
+	@Column(name="user_uuid")
 	String user_uuid;
-	@Column
-	String user_email;
-	@Column
+	
+	@Column(name="item_barcode")
 	String item_barcode;
-	@Column
-	String item_name;
-	@Column
-	int item_price;
-	@Column
+	
+	@Column(name="createdAt")
 	Date createdAt;
-	@Column
+	
+	@Column(name="modifiedAt")
 	Date modifiedAt;
 	
 	public String getUser_uuid() {
@@ -36,11 +52,25 @@ public class PurchaseModel implements Serializable {
 	public void setUser_uuid(String user_uuid) {
 		this.user_uuid = user_uuid;
 	}
-	public String getUser_email() {
-		return user_email;
+	public String getItem_barcode() {
+		return item_barcode;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setItem_barcode(String item_barcode) {
+		this.item_barcode = item_barcode;
 	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+	
+	
 
 }
