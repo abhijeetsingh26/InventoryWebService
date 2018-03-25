@@ -2,11 +2,13 @@ package com.inventorywebservice.inventorymanager.service;
 
 import java.util.HashMap;
 
+import com.inventorywebservice.inventorymanager.Bean.LoginResponseBean;
 import com.inventorywebservice.inventorymanager.Bean.UserLoginBean;
+import com.inventorywebservice.inventorymanager.model.EnduserModel;
 
 public interface LoginService {
 	
-	String doLogin(UserLoginBean userLoginBean);
-	String checkUser(HashMap<String, String> userDataMap);
-	String createNewUserAssociation(HashMap<String, String> userDataMap);
+	LoginResponseBean doLogin(UserLoginBean userLoginBean);
+	EnduserModel checkUser(HashMap<String, String> userDataMap);
+	EnduserModel createNewUserAssociation(HashMap<String, String> userDataMap);
 }

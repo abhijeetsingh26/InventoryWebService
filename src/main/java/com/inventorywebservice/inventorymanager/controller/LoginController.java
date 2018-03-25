@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.inventorywebservice.inventorymanager.Bean.LoginResponseBean;
 import com.inventorywebservice.inventorymanager.Bean.UserLoginBean;
 import com.inventorywebservice.inventorymanager.service.LoginService;
 import com.inventorywebservice.inventorymanager.util.AuthTokenVerifier;
+import com.inventorywebservice.inventorymanager.util.CustomBodyType;
+import com.inventorywebservice.inventorymanager.util.CustomErrorType;
 
 @RestController
 @RequestMapping("/Login")
@@ -30,16 +33,19 @@ public class LoginController {
 
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody UserLoginBean userLoginBean, UriComponentsBuilder ucBuilder) {
-		String userUUID = loginService.doLogin(userLoginBean);
+		LoginResponseBean loginResponseBean = loginService.doLogin(userLoginBean);
 		HttpHeaders headers = new HttpHeaders();
-		if(userUUID == null )
+		
+		if(loginResponseBean.getIsloginVerified())
 		{
-			return new ResponseEntity<String>(headers, HttpStatus.UNAUTHORIZED);
+			headers.set("Content-Type", "application/json");
+			//return new ResponseEntity(new CustomErrorType("Unable to create. A User with name already exist."), HttpStatus.OK);
+			return new ResponseEntity<LoginResponseBean>(loginResponseBean, headers, HttpStatus.OK);
 		}			
 		else
-		{
-			headers.set("userUUID", userUUID);
-			return new ResponseEntity<String>(headers, HttpStatus.OK);
+		{		
+			loginResponseBean.setMessage("Dang, User Authentication Failed. Re-Login to continue.");
+			return new ResponseEntity<LoginResponseBean>(loginResponseBean,headers, HttpStatus.UNAUTHORIZED);
 		}
 	}
 

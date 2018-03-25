@@ -56,7 +56,8 @@ public class AuthTokenVerifier {
 		//	String locale = (String) payload.get("locale");
 			String familyName = (String) payload.get("family_name");
 			String givenName = (String) payload.get("given_name");
-			System.out.println("token verified" + emailVerified + " " + email + " " + name + " " + familyName + " " + givenName);
+			System.out.println(">>>>>Token Verified" +"emailVerified: " +emailVerified + ", email:  " + email + ", name:  " + name + ", familyName: " + familyName + ", givenName:  " + givenName);
+			
 			userDataMap.put("email", email);
 			userDataMap.put("name", name);
 			userDataMap.put("familyName",familyName );
