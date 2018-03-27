@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,9 +32,9 @@ public class PurchaseController {
 
 	// -------------------Retrieve All The Purchases made by the user---------------------------------------------
 
-	@RequestMapping(value = "/purchase/{}", method = RequestMethod.GET)
-	public ResponseEntity<List<PurchaseModel>> listAllPurchasesByUser(@RequestParam String userEmail) {
-		List<PurchaseModel> purchaseByUsers = purchaseService.findAllPurchasesByUser(userEmail);
+	@RequestMapping(value = "/purchase/{userUUID}", method = RequestMethod.GET)
+	public ResponseEntity<List<PurchaseModel>> listAllPurchasesByUser(@PathVariable("userUUID") String userUUID) {
+		List<PurchaseModel> purchaseByUsers = purchaseService.findAllPurchasesByUser(userUUID);
 		if (purchaseByUsers.isEmpty()) {
 			return new ResponseEntity<List<PurchaseModel>>(HttpStatus.NO_CONTENT);
 		}

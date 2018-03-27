@@ -20,8 +20,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Autowired
 	LoginService loginService;
 
-	public List<PurchaseModel> findAllPurchasesByUser(String userEmail) {
-
+	public List<PurchaseModel> findAllPurchasesByUser(String userUUID) {
+			List<PurchaseModel> allUsers = purchaseRepository.findByuserUuid(userUUID);
+			System.out.println(">>>>userUUID" + userUUID);
+			System.out.println(">>>>> ALLUSERS"+ allUsers);
+			for(PurchaseModel currentPurchaseForUser:allUsers)
+			{
+				String currentBarcode = currentPurchaseForUser.getItemBarcode();
+			}
 		return null;
 	}
 
@@ -30,8 +36,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 		boolean userExists = loginService.checkUserExistForUUID(purchaseRequestBean.getUserUUID());
 		if (userExists) {
 			PurchaseModel pm = new PurchaseModel();
-			pm.setItem_barcode(purchaseRequestBean.getItemBarCode());
-			pm.setUser_uuid(purchaseRequestBean.getUserUUID());
+			pm.setItemBarcode(purchaseRequestBean.getItemBarCode());
+			pm.setUserUuid(purchaseRequestBean.getUserUUID());
 			Date d = new Date();
 			pm.setCreatedAt(d);
 			pm.setModifiedAt(d);

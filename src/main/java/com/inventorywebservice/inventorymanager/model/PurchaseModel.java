@@ -34,29 +34,30 @@ public class PurchaseModel implements Serializable {
 	public void setPurchaseSerial(int purchaseSerial) {
 		this.purchaseSerial = purchaseSerial;
 	}
-	@Column(name="user_uuid")
-	String user_uuid;
+	@Column(name="userUuid")
+	String userUuid;
 	
-	@Column(name="item_barcode")
-	String item_barcode;
+	@Column(name="itemBarcode")
+	String itemBarcode;
 	
 	@Column(name="createdAt")
 	Date createdAt;
 	
 	@Column(name="modifiedAt")
 	Date modifiedAt;
-	
-	public String getUser_uuid() {
-		return user_uuid;
+
+
+	public String getUserUuid() {
+		return userUuid;
 	}
-	public void setUser_uuid(String user_uuid) {
-		this.user_uuid = user_uuid;
+	public void setUserUuid(String userUuid) {
+		this.userUuid = userUuid;
 	}
-	public String getItem_barcode() {
-		return item_barcode;
+	public String getItemBarcode() {
+		return itemBarcode;
 	}
-	public void setItem_barcode(String item_barcode) {
-		this.item_barcode = item_barcode;
+	public void setItemBarcode(String itemBarcode) {
+		this.itemBarcode = itemBarcode;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
@@ -70,7 +71,6 @@ public class PurchaseModel implements Serializable {
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-	
-	
+
 
 }
