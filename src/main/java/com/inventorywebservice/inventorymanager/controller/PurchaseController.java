@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.inventorywebservice.inventorymanager.Bean.PurchaseDetailsResponseBean;
 import com.inventorywebservice.inventorymanager.Bean.PurchaseRequestBean;
 import com.inventorywebservice.inventorymanager.Bean.PurchaseResponseBean;
 import com.inventorywebservice.inventorymanager.model.PurchaseModel;
@@ -33,12 +34,12 @@ public class PurchaseController {
 	// -------------------Retrieve All The Purchases made by the user---------------------------------------------
 
 	@RequestMapping(value = "/purchase/{userUUID}", method = RequestMethod.GET)
-	public ResponseEntity<List<PurchaseModel>> listAllPurchasesByUser(@PathVariable("userUUID") String userUUID) {
-		List<PurchaseModel> purchaseByUsers = purchaseService.findAllPurchasesByUser(userUUID);
+	public ResponseEntity<List<PurchaseDetailsResponseBean>> listAllPurchasesByUser(@PathVariable("userUUID") String userUUID) {
+		List<PurchaseDetailsResponseBean> purchaseByUsers = purchaseService.findAllPurchasesByUser(userUUID);
 		if (purchaseByUsers.isEmpty()) {
-			return new ResponseEntity<List<PurchaseModel>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<PurchaseDetailsResponseBean>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<PurchaseModel>>(purchaseByUsers, HttpStatus.OK);
+		return new ResponseEntity<List<PurchaseDetailsResponseBean>>(purchaseByUsers, HttpStatus.OK);
 	}
 
 	
