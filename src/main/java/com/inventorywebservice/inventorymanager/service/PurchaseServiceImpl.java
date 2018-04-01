@@ -58,6 +58,16 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
+	public String getTotalAmountFromPurchaseList(List<PurchaseDetailsResponseBean> pdrb) {
+		Integer total = 0;
+		for(PurchaseDetailsResponseBean currentPRB:pdrb)
+		{
+			total = total +currentPRB.getItemPrice();
+		}
+		return total.toString();
+	}
+
+	@Override
 	public PurchaseResponseBean createNewPurchaseForUser(PurchaseRequestBean purchaseRequestBean) {
 		boolean userExists = loginService.checkUserExistForUUID(purchaseRequestBean.getUserUUID());
 		if (userExists) {
@@ -82,5 +92,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return pResBean;
 		}
 	}
+
 
 }

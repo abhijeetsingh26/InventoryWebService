@@ -9,14 +9,14 @@ public class PurchaseDetailsResponseBean {
 	String itemBarcode;
 	String itemName;
 	int itemPrice;
-	int totalAmount = -1;
+	/*int totalAmount = -1;
 	public int getTotalAmount() {
 		return totalAmount;
 	}
 
 	public void setTotalAmount(int totalAmount) {
 		this.totalAmount = totalAmount;
-	}
+	}*/
 
 	Date createdAt;
 	Date modifiedAt;

@@ -10,4 +10,6 @@ public interface PurchaseService {
 	public List<PurchaseDetailsResponseBean> findAllPurchasesByUser(String userEmail);
 	
 	PurchaseResponseBean createNewPurchaseForUser(PurchaseRequestBean prb);
+	
+	String getTotalAmountFromPurchaseList(List<PurchaseDetailsResponseBean> prb);
 }

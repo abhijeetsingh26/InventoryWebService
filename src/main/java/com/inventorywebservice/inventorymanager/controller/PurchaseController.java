@@ -36,10 +36,15 @@ public class PurchaseController {
 	@RequestMapping(value = "/purchase/{userUUID}", method = RequestMethod.GET)
 	public ResponseEntity<List<PurchaseDetailsResponseBean>> listAllPurchasesByUser(@PathVariable("userUUID") String userUUID) {
 		List<PurchaseDetailsResponseBean> purchaseByUsers = purchaseService.findAllPurchasesByUser(userUUID);
-		if (purchaseByUsers.isEmpty()) {
+		if (purchaseByUsers.isEmpty()) 
+		{
 			return new ResponseEntity<List<PurchaseDetailsResponseBean>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<PurchaseDetailsResponseBean>>(purchaseByUsers, HttpStatus.OK);
+		else
+		{	HttpHeaders headers = new HttpHeaders();
+			headers.add("TotalAmount", purchaseService.getTotalAmountFromPurchaseList(purchaseByUsers));
+			return new ResponseEntity<List<PurchaseDetailsResponseBean>>(purchaseByUsers,headers, HttpStatus.OK);
+		}
 	}
 
 	
