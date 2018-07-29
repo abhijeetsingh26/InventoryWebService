@@ -35,6 +35,7 @@ public class PurchaseController {
 
 	@RequestMapping(value = "/purchase/{userUUID}", method = RequestMethod.GET)
 	public ResponseEntity<List<PurchaseDetailsResponseBean>> listAllPurchasesByUser(@PathVariable("userUUID") String userUUID) {
+		long startTime = System.nanoTime();
 		List<PurchaseDetailsResponseBean> purchaseByUsers = purchaseService.findAllPurchasesByUser(userUUID);
 		if (purchaseByUsers.isEmpty()) 
 		{
@@ -43,6 +44,8 @@ public class PurchaseController {
 		else
 		{	HttpHeaders headers = new HttpHeaders();
 			headers.add("TotalAmount", purchaseService.getTotalAmountFromPurchaseList(purchaseByUsers));
+			long endTime = System.nanoTime();
+			System.out.println(">>>>>> PURCHASE RETURN TIME: " + (endTime - startTime)/1000000000.0 + " seconds");
 			return new ResponseEntity<List<PurchaseDetailsResponseBean>>(purchaseByUsers,headers, HttpStatus.OK);
 		}
 	}
@@ -58,6 +61,25 @@ public class PurchaseController {
 		if(isPurchaseSuccessful)
 		{
 			return new ResponseEntity<PurchaseResponseBean>(pResBean,headers, HttpStatus.CREATED);
+		}
+		else
+		{			
+			return new ResponseEntity<PurchaseResponseBean>(pResBean,headers, HttpStatus.UNAUTHORIZED);		
+
+		}
+	}
+	
+	// -------------------Create a Purchase for the user and return that-------------------------------------------
+
+	@RequestMapping(value = "/purchaseNEW/", method = RequestMethod.POST)
+	public ResponseEntity<?> createUserPurhase(@RequestBody PurchaseRequestBean prb, UriComponentsBuilder ucBuilder) {
+		PurchaseResponseBean pResBean = purchaseService.createNewPurchaseForUser(prb);
+		Boolean isPurchaseSuccessful = pResBean.getIsPurchaseSuccessfull();
+		HttpHeaders headers = new HttpHeaders();
+		if(isPurchaseSuccessful)
+		{
+			List<PurchaseDetailsResponseBean> purchaseByUsers = purchaseService.findAllPurchasesByUser(prb.getUserUUID());
+			return new ResponseEntity<List<PurchaseDetailsResponseBean>>(purchaseByUsers,headers, HttpStatus.CREATED);
 		}
 		else
 		{			

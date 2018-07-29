@@ -34,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
 			lrb.setUserFname(enduserModel.getUserFirstName());
 			lrb.setUserLname(enduserModel.getUserLastName());
 			lrb.setUserUUID(enduserModel.getuserUUID());
-			lrb.setMessage("User Logged In.");
+			lrb.setMessage("Logged in as " + enduserModel.getUserFirstName());
 			return lrb;
 		}
 		else

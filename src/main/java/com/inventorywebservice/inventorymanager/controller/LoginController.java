@@ -44,7 +44,7 @@ public class LoginController {
 		}			
 		else
 		{		
-			loginResponseBean.setMessage("Dang, User Authentication Failed. Re-Login to continue.");
+			loginResponseBean.setMessage("Dang, User Authentication Failed. Re-Start App to continue.");
 			return new ResponseEntity<LoginResponseBean>(loginResponseBean,headers, HttpStatus.UNAUTHORIZED);
 		}
 	}
