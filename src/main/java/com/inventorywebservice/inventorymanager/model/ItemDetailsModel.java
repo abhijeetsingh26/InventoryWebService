@@ -11,7 +11,12 @@ import javax.persistence.Table;
 public class ItemDetailsModel implements Serializable{
 	
 	@Id
+	String itemBarcode;
 	String itemName;
+	
+	int itemPrice;
+	
+	String extra;
 	
 	public String getItemName() {
 		return itemName;
@@ -45,10 +50,5 @@ public class ItemDetailsModel implements Serializable{
 		this.extra = extra;
 	}
 
-	String itemBarcode;
-	
-	int itemPrice;
-	
-	String extra;
 
 }
